@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Finance Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo">💰 Finance Tracker</h1>
+      <p class="header-month" id="current-month">Month</p>
+    </div>
+  </header>
+
+  <main class="container dashboard">
+
+    <!-- Summary cards -->
+    <section class="summary" aria-label="Account summary">
+      <article class="card summary-card balance">
+        <h2 class="card-label">Total Balance</h2>
+        <p class="card-value" id="total-balance">$0.00</p>
+      </article>
+      <article class="card summary-card income">
+        <h2 class="card-label">Income</h2>
+        <p class="card-value" id="total-income">$0.00</p>
+      </article>
+      <article class="card summary-card expenses">
+        <h2 class="card-label">Expenses</h2>
+        <p class="card-value" id="total-expenses">$0.00</p>
+      </article>
+    </section>
+
+    <!-- Monthly budget -->
+    <section class="card budget" aria-labelledby="budget-title">
+      <div class="section-header">
+        <h2 id="budget-title">Monthly Budget</h2>
+        <button class="btn btn-secondary" type="button" disabled>Set Budget</button>
+      </div>
+      <p class="budget-text">
+        <span id="budget-spent">$0.00</span> spent of
+        <span id="budget-limit">$0.00</span>
+      </p>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-bar" id="budget-progress" style="width: 0%"></div>
+      </div>
+      <p class="muted" id="budget-remaining">Budget setup coming in Week 3.</p>
+    </section>
+
+    <!-- Recent transactions -->
+    <section class="card transactions" aria-labelledby="transactions-title">
+      <div class="section-header">
+        <h2 id="transactions-title">Recent Transactions</h2>
+        <button class="btn btn-primary" type="button" disabled>+ Add</button>
+      </div>
+      <ul class="transaction-list" id="transaction-list">
+        <li class="empty-state">No transactions yet. Adding transactions arrives in Week 2.</li>
+      </ul>
+    </section>
+
+    <!-- Savings goals -->
+    <section class="card goals" aria-labelledby="goals-title">
+      <div class="section-header">
+        <h2 id="goals-title">Savings Goals</h2>
+        <button class="btn btn-secondary" type="button" disabled>+ New Goal</button>
+      </div>
+      <ul class="goal-list" id="goal-list">
+        <li class="goal placeholder">
+          <div class="goal-info">
+            <span class="goal-name">Example: Emergency Fund</span>
+            <span class="goal-amount">$0 / $1,000</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" style="width: 0%"></div>
+          </div>
+        </li>
+      </ul>
+      <p class="muted">Savings goals arrive in Week 4.</p>
+    </section>
+
+    <!-- Spending charts -->
+    <section class="card charts" aria-labelledby="charts-title">
+      <div class="section-header">
+        <h2 id="charts-title">Spending Charts</h2>
+      </div>
+      <div class="chart-grid">
+        <figure class="chart-placeholder" id="category-chart">
+          <figcaption>Spending by Category</figcaption>
+          <div class="chart-box">Chart coming in Week 3</div>
+        </figure>
+        <figure class="chart-placeholder" id="trend-chart">
+          <figcaption>Monthly Trend</figcaption>
+          <div class="chart-box">Chart coming in Week 3</div>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="container">Data is stored locally in your browser. TCSS 490 — Artifact 5.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

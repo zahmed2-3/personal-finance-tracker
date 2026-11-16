@@ -1,0 +1,285 @@
+/* ===== Design tokens ===== */
+:root {
+  --color-bg: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-text: #1f2937;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+
+  --color-primary: #4f46e5;
+  --color-primary-dark: #4338ca;
+  --color-income: #059669;
+  --color-expense: #dc2626;
+  --color-balance: #2563eb;
+
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --max-width: 1200px;
+}
+
+/* ===== Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+h1, h2, p, ul, figure {
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-2);
+}
+
+.muted {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+/* ===== Header & footer ===== */
+.site-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-2) 0;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.header-month {
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.site-footer {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  padding: var(--space-4) 0;
+}
+
+/* ===== Dashboard grid (mobile-first: one column) ===== */
+.dashboard {
+  display: grid;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-3);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.section-header h2 {
+  font-size: 1.1rem;
+}
+
+/* ===== Summary cards ===== */
+.summary {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.summary-card {
+  border-left: 4px solid var(--color-border);
+}
+
+.summary-card.balance  { border-left-color: var(--color-balance); }
+.summary-card.income   { border-left-color: var(--color-income); }
+.summary-card.expenses { border-left-color: var(--color-expense); }
+
+.card-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.card-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+}
+
+.income .card-value   { color: var(--color-income); }
+.expenses .card-value { color: var(--color-expense); }
+
+/* ===== Buttons ===== */
+.btn {
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ===== Progress bars ===== */
+.progress {
+  height: 10px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: var(--space-1) 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.budget-text {
+  font-weight: 500;
+}
+
+/* ===== Transactions ===== */
+.transaction-list,
+.goal-list {
+  list-style: none;
+  padding: 0;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--color-muted);
+  padding: var(--space-3) var(--space-1);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+}
+
+/* ===== Savings goals ===== */
+.goal {
+  padding: var(--space-1) 0;
+}
+
+.goal.placeholder {
+  opacity: 0.6;
+}
+
+.goal-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.goal-name {
+  font-weight: 600;
+}
+
+/* ===== Charts ===== */
+.chart-grid {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.chart-placeholder figcaption {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-1);
+}
+
+.chart-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* ===== Tablet ===== */
+@media (min-width: 640px) {
+  .summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .chart-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== Desktop ===== */
+@media (min-width: 960px) {
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "summary      summary"
+      "budget       goals"
+      "transactions charts";
+  }
+
+  .summary      { grid-area: summary; }
+  .budget       { grid-area: budget; }
+  .goals        { grid-area: goals; }
+  .transactions { grid-area: transactions; }
+  .charts       { grid-area: charts; }
+
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
