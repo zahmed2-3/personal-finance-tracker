@@ -87,6 +87,9 @@ h1, h2, p, ul, figure {
 /* ===== Dashboard grid (mobile-first: one column) ===== */
 .dashboard {
   display: grid;
+  /* minmax(0, 1fr) stops long, non-wrapping text from stretching the
+     column wider than the screen (plain 1fr won't shrink below its content) */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-2);
   padding-top: var(--space-3);
   padding-bottom: var(--space-3);
@@ -142,6 +145,7 @@ h1, h2, p, ul, figure {
 
 .income .card-value   { color: var(--color-income); }
 .expenses .card-value { color: var(--color-expense); }
+.balance .card-value.negative { color: var(--color-expense); }
 
 /* ===== Buttons ===== */
 .btn {
@@ -195,11 +199,206 @@ h1, h2, p, ul, figure {
   font-weight: 500;
 }
 
+.btn-block {
+  width: 100%;
+  min-height: 44px;
+}
+
+/* Hidden visually but still read by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ===== Add transaction form ===== */
+.transaction-form {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.form-row {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.form-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.form-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+.form-field input,
+.form-field select {
+  font: inherit;
+  font-size: 1rem; /* 16px+ stops iOS from zooming in on focus */
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: var(--color-primary);
+}
+
+.form-field input[aria-invalid="true"],
+.form-field select[aria-invalid="true"] {
+  border-color: var(--color-expense);
+}
+
+.field-error {
+  color: var(--color-expense);
+  font-size: 0.8rem;
+  min-height: 1em;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+.form-status {
+  font-size: 0.875rem;
+  color: var(--color-income);
+  text-align: center;
+}
+
+.form-status:empty {
+  display: none;
+}
+
+/* Income / Expense segmented toggle */
+.type-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: var(--color-bg);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.type-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.type-option {
+  text-align: center;
+  font-weight: 600;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--color-muted);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.type-toggle input:focus-visible + .type-option {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+#type-expense:checked + .type-option {
+  background: var(--color-surface);
+  color: var(--color-expense);
+  box-shadow: var(--shadow);
+}
+
+#type-income:checked + .type-option {
+  background: var(--color-surface);
+  color: var(--color-income);
+  box-shadow: var(--shadow);
+}
+
 /* ===== Transactions ===== */
 .transaction-list,
 .goal-list {
   list-style: none;
   padding: 0;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-details {
+  flex: 1;
+  min-width: 0; /* lets long descriptions truncate instead of overflowing */
+}
+
+.transaction-title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transaction-meta {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.transaction-amount {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.transaction-amount.income  { color: var(--color-income); }
+.transaction-amount.expense { color: var(--color-expense); }
+
+.btn-delete {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--color-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-delete:hover,
+.btn-delete:focus-visible {
+  color: var(--color-expense);
+  border-color: var(--color-expense);
+  background: #fef2f2;
+}
+
+.empty-state[hidden] {
+  display: none;
 }
 
 .empty-state {
@@ -261,25 +460,34 @@ h1, h2, p, ul, figure {
   .chart-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* ===== Desktop ===== */
 @media (min-width: 960px) {
   .dashboard {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
-      "summary      summary"
-      "budget       goals"
-      "transactions charts";
+      "summary summary"
+      "form    transactions"
+      "budget  goals"
+      "charts  charts";
   }
 
-  .summary      { grid-area: summary; }
-  .budget       { grid-area: budget; }
-  .goals        { grid-area: goals; }
-  .transactions { grid-area: transactions; }
-  .charts       { grid-area: charts; }
+  .summary         { grid-area: summary; }
+  .add-transaction { grid-area: form; }
+  .transactions    { grid-area: transactions; }
+  .budget          { grid-area: budget; }
+  .goals           { grid-area: goals; }
+  .charts          { grid-area: charts; }
 
-  .chart-grid {
-    grid-template-columns: 1fr;
+  /* Scroll long histories instead of stretching the page */
+  .transaction-list {
+    max-height: 460px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
   }
 }

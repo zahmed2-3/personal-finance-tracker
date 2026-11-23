@@ -14,7 +14,7 @@ The finished app will let you:
 
 No account, server, paid API, or bank connection is needed. Your data never leaves your device.
 
-> **Status:** Week 1 of 5 — the dashboard layout is in place with placeholder content. Features are added week by week (see [PLAN.md](PLAN.md)).
+> **Status:** Week 2 of 5 — you can add and delete income/expense transactions, see live totals, and your data is saved between visits. Budget, charts, and savings goals are still placeholders. Features are added week by week (see [PLAN.md](PLAN.md)).
 
 ## How to Run
 

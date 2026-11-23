@@ -32,6 +32,61 @@
       </article>
     </section>
 
+    <!-- Add transaction form -->
+    <section class="card add-transaction" aria-labelledby="form-title">
+      <div class="section-header">
+        <h2 id="form-title">Add Transaction</h2>
+      </div>
+      <form id="transaction-form" class="transaction-form" novalidate>
+        <fieldset class="type-toggle">
+          <legend class="visually-hidden">Transaction type</legend>
+          <input type="radio" id="type-expense" name="type" value="expense" checked>
+          <label for="type-expense" class="type-option expense">Expense</label>
+          <input type="radio" id="type-income" name="type" value="income">
+          <label for="type-income" class="type-option income">Income</label>
+        </fieldset>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="amount">Amount ($)</label>
+            <input type="number" id="amount" name="amount" inputmode="decimal"
+                   min="0.01" step="0.01" placeholder="0.00" aria-describedby="amount-error">
+            <p class="field-error" id="amount-error" aria-live="polite"></p>
+          </div>
+          <div class="form-field">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" aria-describedby="date-error">
+            <p class="field-error" id="date-error" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="category">Category</label>
+          <select id="category" name="category" aria-describedby="category-error"></select>
+          <p class="field-error" id="category-error" aria-live="polite"></p>
+        </div>
+
+        <div class="form-field">
+          <label for="description">Description <span class="optional">(optional)</span></label>
+          <input type="text" id="description" name="description" maxlength="100"
+                 placeholder="e.g. Groceries at Safeway">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Add Transaction</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- Transaction history -->
+    <section class="card transactions" aria-labelledby="transactions-title">
+      <div class="section-header">
+        <h2 id="transactions-title">Transaction History</h2>
+        <span class="muted" id="transaction-count">0 entries</span>
+      </div>
+      <p class="empty-state" id="transactions-empty">No transactions yet. Add your first one using the form.</p>
+      <ul class="transaction-list" id="transaction-list"></ul>
+    </section>
+
     <!-- Monthly budget -->
     <section class="card budget" aria-labelledby="budget-title">
       <div class="section-header">
@@ -46,17 +101,6 @@
         <div class="progress-bar" id="budget-progress" style="width: 0%"></div>
       </div>
       <p class="muted" id="budget-remaining">Budget setup coming in Week 3.</p>
-    </section>
-
-    <!-- Recent transactions -->
-    <section class="card transactions" aria-labelledby="transactions-title">
-      <div class="section-header">
-        <h2 id="transactions-title">Recent Transactions</h2>
-        <button class="btn btn-primary" type="button" disabled>+ Add</button>
-      </div>
-      <ul class="transaction-list" id="transaction-list">
-        <li class="empty-state">No transactions yet. Adding transactions arrives in Week 2.</li>
-      </ul>
     </section>
 
     <!-- Savings goals -->
